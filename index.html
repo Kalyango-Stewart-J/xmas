@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Futuristic CS Christmas & New Year 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Orbitron Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #020617, #000);
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      overflow-x: hidden; /* enable vertical scrolling */
+    }
+
+    /* Matrix Background */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      padding: 60px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Glowing Title */
+    .title {
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #00f0ff;
+      text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff, 0 0 60px cyan;
+      animation: glowPulse 2s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from {
+        text-shadow: 0 0 15px #00f0ff, 0 0 30px #00ffe6;
+      }
+      to {
+        text-shadow: 0 0 25px #00f0ff, 0 0 60px #00ffe6;
+      }
+    }
+
+    /* Neon Panel */
+    .panel {
+      max-width: 900px;
+      width: 100%;
+      border: 2px solid rgba(0, 255, 255, 0.7);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 30px;
+      box-shadow: 0 0 20px cyan, 0 0 40px #00f0ff inset;
+      backdrop-filter: blur(6px);
+    }
+
+    .message {
+      font-size: clamp(1rem, 3.8vw, 1.4rem);
+      line-height: 1.7;
+      color: #d6faff;
+      text-shadow: 0 0 8px #00e1ff;
+    }
+
+    .year {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      color: #39ff14;
+      text-shadow: 0 0 10px #39ff14, 0 0 30px #39ff14;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 30px;
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      color: #a8fffb;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+  <div class="title">Merry Christmas 🎄 CS CLASS</div>
+
+  <div class="panel">
+    <p class="message">
+      May your <strong>code compile flawlessly</strong>, your <strong>debugging be minimal</strong>,<br>
+      and your <strong>CPU run cool with endless creativity</strong>.<br><br>
+
+      As we upload memories of 2025 and execute dreams for
+      <span class="year">2026</span>
+      may your life be filled with <strong>innovation, success, and futuristic adventures</strong>.<br><br>
+
+      Merry Christmas and a Spectacular Tech-Powered New Year 2026! 🚀✨
+    </p>
+  </div>
+
+  <div class="footer">
+    From your Computer Science Universe 🌌 — where logic, magic, and imagination meet.
+  </div>
+</div>
+
+<script>
+  // Matrix Rain Background
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+
+  const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>=+-*/&|#@$";
+  const fontSize = 18;
+  let columns = canvas.width / fontSize;
+  let drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ffea";
+    ctx.font = fontSize + "px Orbitron, monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 35);
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    columns = canvas.width / fontSize;
+    drops = Array(Math.floor(columns)).fill(1);
+  });
+</script>
+
+</body>
+</html>
